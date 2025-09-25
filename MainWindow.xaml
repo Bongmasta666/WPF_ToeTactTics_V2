@@ -1,0 +1,55 @@
+﻿<Window x:Class="ToeTactTics_V2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToeTactTics_V2"
+        mc:Ignorable="d"
+        Title="Bong's ToeTactics" Height="450" Width="450" WindowStartupLocation="CenterScreen" Background="Green" ResizeMode="CanResize" MinWidth="300" MinHeight="440">
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="18"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="16"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <DockPanel Grid.Row="0">
+            <Menu>
+                <MenuItem Header="Game">
+                    <MenuItem Header="New Game" Click="OnNewGame"></MenuItem>
+                    <MenuItem Header="Quit Game" Click="OnQuitGame"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Options"></MenuItem>
+            </Menu>
+        </DockPanel>
+        <Label x:Name="labelPlayerTurn" Content="Unknown User's Turn" HorizontalAlignment="Center" Margin="0,8,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" FontFamily="Rockwell" FontWeight="Bold" Foreground="LightGoldenrodYellow"/>
+        <Label x:Name="labelPlayerXInfo" Content="Player (X) Unknown User : Wins - 0" HorizontalAlignment="Center" Margin="0,32,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="14" FontFamily="Rockwell" FontWeight="Bold" Foreground="LightGoldenrodYellow"/>
+        <Label x:Name="labelPlayerOInfo" Content="Player (O) Unknown User : Wins - 0" HorizontalAlignment="Center" Margin="0,52,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="14" FontFamily="Rockwell" FontWeight="Bold" Foreground="LightGoldenrodYellow"/>
+        
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Margin="0,83,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="button1" Width="90" Height="90" Grid.Row="0" Grid.Column="0" IsEnabled="False" FontSize="40" ToolTip="Top Left" Click="OnSquareSelected"/>
+            <Button x:Name="button2" Width="90" Height="90" Grid.Row="0" Grid.Column="1" IsEnabled="False" FontSize="40" ToolTip="Top Middle" Click="OnSquareSelected"/>
+            <Button x:Name="button3" Width="90" Height="90" Grid.Row="0" Grid.Column="2" IsEnabled="False" FontSize="40" ToolTip="Top Right" Click="OnSquareSelected"/>
+            <Button x:Name="button4" Width="90" Height="90" Grid.Row="1" Grid.Column="0" IsEnabled="False" FontSize="40" ToolTip="Middle Left" Click="OnSquareSelected"/>
+            <Button x:Name="button5" Width="90" Height="90" Grid.Row="1" Grid.Column="1" IsEnabled="False" FontSize="40" ToolTip="Middle Middle" Click="OnSquareSelected"/>
+            <Button x:Name="button6" Width="90" Height="90" Grid.Row="1" Grid.Column="2" IsEnabled="False" FontSize="40" ToolTip="Middle Right" Click="OnSquareSelected"/>
+            <Button x:Name="button7" Width="90" Height="90" Grid.Row="2" Grid.Column="0" IsEnabled="False" FontSize="40" ToolTip="Bottom Left" Click="OnSquareSelected"/>
+            <Button x:Name="button8" Width="90" Height="90" Grid.Row="2" Grid.Column="1" IsEnabled="False" FontSize="40" ToolTip="Bottom Middle" Click="OnSquareSelected"/>
+            <Button x:Name="button9" Width="90" Height="90" Grid.Row="2" Grid.Column="2" IsEnabled="False" FontSize="40" ToolTip="Bottom Right" Click="OnSquareSelected"/>
+        </Grid>
+        
+        <Rectangle Grid.Row="2" Fill="WhiteSmoke"></Rectangle>
+     
+    </Grid>
+</Window>

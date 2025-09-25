@@ -1,0 +1,20 @@
+﻿<Window x:Class="ToeTactTics_V2.CustomPopUp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToeTactTics_V2"
+        mc:Ignorable="d"
+        Title="CustomPopUp" Height="200" Width="380" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" Background="#FFCFA66D">
+    <Grid>
+
+        <Label Content="Please Enter Names For Both Players Below" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontFamily="Rockwell" FontSize="14"/>
+        <Label x:Name="labelPlayerX" Content="Player (X)" HorizontalAlignment="Left" Margin="55,39,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Rockwell"/>
+        <TextBox x:Name="textBoxPlayerX" HorizontalAlignment="Left" Margin="132,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="182" FontSize="14" MaxLength="14"/>
+        <Label x:Name="labelPlayerO" Content="Player (O)" HorizontalAlignment="Left" Margin="55,72,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Rockwell"/>
+        <TextBox x:Name="textBoxPlayerO" HorizontalAlignment="Left" Margin="132,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="182" MaxLength="14" FontSize="14"/>
+        <Button x:Name="buttonSubmit" Content="Submit" HorizontalAlignment="Left" Margin="132,111,0,0" Padding="4,2" VerticalAlignment="Top" FontSize="14" Background="WhiteSmoke" Click="OnSubmit" FontFamily="Rockwell"/>
+        <Button x:Name="buttonCancel" Content="Cancel" HorizontalAlignment="Left" Margin="223,111,0,0" Padding="4,2" VerticalAlignment="Top" FontSize="14" Background="WhiteSmoke" Click="OnCancel" FontFamily="Rockwell"/>
+
+    </Grid>
+</Window>

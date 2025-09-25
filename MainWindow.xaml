@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToeTactTics_V2"
         mc:Ignorable="d"
-        Title="Bong's ToeTactics" Height="450" Width="450" WindowStartupLocation="CenterScreen" Background="Green" ResizeMode="CanResize" MinWidth="300" MinHeight="440">
+        Title="Bong's ToeTactics" Height="460" Width="450" WindowStartupLocation="CenterScreen" Background="Green" ResizeMode="CanResize" MinWidth="300" MinHeight="440">
     <Grid>
         
         <Grid.RowDefinitions>

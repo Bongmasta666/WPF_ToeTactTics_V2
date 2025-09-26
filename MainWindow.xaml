@@ -38,15 +38,15 @@
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button x:Name="button1" Width="90" Height="90" Grid.Row="0" Grid.Column="0" IsEnabled="False" FontSize="40" ToolTip="Top Left" Click="OnSquareSelected"/>
-            <Button x:Name="button2" Width="90" Height="90" Grid.Row="0" Grid.Column="1" IsEnabled="False" FontSize="40" ToolTip="Top Middle" Click="OnSquareSelected"/>
-            <Button x:Name="button3" Width="90" Height="90" Grid.Row="0" Grid.Column="2" IsEnabled="False" FontSize="40" ToolTip="Top Right" Click="OnSquareSelected"/>
-            <Button x:Name="button4" Width="90" Height="90" Grid.Row="1" Grid.Column="0" IsEnabled="False" FontSize="40" ToolTip="Middle Left" Click="OnSquareSelected"/>
-            <Button x:Name="button5" Width="90" Height="90" Grid.Row="1" Grid.Column="1" IsEnabled="False" FontSize="40" ToolTip="Middle Middle" Click="OnSquareSelected"/>
-            <Button x:Name="button6" Width="90" Height="90" Grid.Row="1" Grid.Column="2" IsEnabled="False" FontSize="40" ToolTip="Middle Right" Click="OnSquareSelected"/>
-            <Button x:Name="button7" Width="90" Height="90" Grid.Row="2" Grid.Column="0" IsEnabled="False" FontSize="40" ToolTip="Bottom Left" Click="OnSquareSelected"/>
-            <Button x:Name="button8" Width="90" Height="90" Grid.Row="2" Grid.Column="1" IsEnabled="False" FontSize="40" ToolTip="Bottom Middle" Click="OnSquareSelected"/>
-            <Button x:Name="button9" Width="90" Height="90" Grid.Row="2" Grid.Column="2" IsEnabled="False" FontSize="40" ToolTip="Bottom Right" Click="OnSquareSelected"/>
+            <Button x:Name="button1" Width="90" Height="90" Grid.Row="0" Grid.Column="0" IsEnabled="False" FontSize="40" ToolTip="Top Left" Click="OnSquareSelected" Content=""/>
+            <Button x:Name="button2" Width="90" Height="90" Grid.Row="0" Grid.Column="1" IsEnabled="False" FontSize="40" ToolTip="Top Middle" Click="OnSquareSelected" Content=""/>
+            <Button x:Name="button3" Width="90" Height="90" Grid.Row="0" Grid.Column="2" IsEnabled="False" FontSize="40" ToolTip="Top Right" Click="OnSquareSelected" Content=""/>
+            <Button x:Name="button4" Width="90" Height="90" Grid.Row="1" Grid.Column="0" IsEnabled="False" FontSize="40" ToolTip="Middle Left" Click="OnSquareSelected" Content=""/>
+            <Button x:Name="button5" Width="90" Height="90" Grid.Row="1" Grid.Column="1" IsEnabled="False" FontSize="40" ToolTip="Middle Middle" Click="OnSquareSelected" Content=""/>
+            <Button x:Name="button6" Width="90" Height="90" Grid.Row="1" Grid.Column="2" IsEnabled="False" FontSize="40" ToolTip="Middle Right" Click="OnSquareSelected" Content=""/>
+            <Button x:Name="button7" Width="90" Height="90" Grid.Row="2" Grid.Column="0" IsEnabled="False" FontSize="40" ToolTip="Bottom Left" Click="OnSquareSelected" Content=""/>
+            <Button x:Name="button8" Width="90" Height="90" Grid.Row="2" Grid.Column="1" IsEnabled="False" FontSize="40" ToolTip="Bottom Middle" Click="OnSquareSelected" Content=""/>
+            <Button x:Name="button9" Width="90" Height="90" Grid.Row="2" Grid.Column="2" IsEnabled="False" FontSize="40" ToolTip="Bottom Right" Click="OnSquareSelected" Content=""/>
         </Grid>
         
         <Rectangle Grid.Row="2" Fill="WhiteSmoke"></Rectangle>

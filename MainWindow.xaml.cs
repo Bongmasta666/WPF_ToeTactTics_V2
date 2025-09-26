@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -25,9 +26,12 @@ namespace ToeTactTics_V2
         int playerXWins = 0;
         int playerOWins = 0;
         bool isPlayerXTurn = true;
+        bool playerWon = false;
 
         Button[] buttons = [];
         int buttonsRemaining = 9;
+
+        SolidColorBrush buttonHighlight = Brushes.LightSalmon; 
         public MainWindow()
         {
             InitializeComponent();
@@ -35,11 +39,7 @@ namespace ToeTactTics_V2
                          button6, button7, button8, button9];
         }
 
-        public void OnNewGame(Object sender , RoutedEventArgs e) => NewGame();
-        public void NewGame()
-        {
-            ShowUsernameDialog();
-        }
+        public void OnNewGame(Object sender , RoutedEventArgs e) => ShowUsernameDialog();
 
         public void StartGame()
         {
@@ -54,13 +54,39 @@ namespace ToeTactTics_V2
             target.Content = (isPlayerXTurn) ? "X" : "O";
             target.IsEnabled = false;
 
+            EvaluateBoard();
+
             isPlayerXTurn = !isPlayerXTurn;
             ShowActivePlayer();
         }
 
+        public void EvaluateBoard()
+        {
+            //Horizontal
+            CheckLine(button1, button2, button3);
+            CheckLine(button4, button5, button6);
+            CheckLine(button7, button8, button9);
+            //Vertical
+            CheckLine(button1, button4, button7);
+            CheckLine(button2, button5, button8);
+            CheckLine(button3, button6, button9);
+            //Diagonal
+            CheckLine(button1, button5, button9);
+            CheckLine(button3, button5, button7);
+        }
+
         public bool CheckLine(Button first, Button second, Button third)
         {
-            return first.Content == second.Content && second.Content == third.Content && first.Content.ToString() != "";
+            bool isConnected = first.Content == second.Content &&
+                second.Content == third.Content && first.Content.ToString() != "";
+            if (isConnected)
+            {
+                playerWon = true;
+                first.Foreground = buttonHighlight;
+                second.Foreground = buttonHighlight;
+                third.Foreground = buttonHighlight;
+            }
+            return isConnected;
         }
 
         public void SetBoardState(bool isActive)

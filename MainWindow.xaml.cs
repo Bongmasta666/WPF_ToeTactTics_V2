@@ -43,8 +43,11 @@ namespace ToeTactTics_V2
 
         public void StartGame()
         {
+            buttonsRemaining = 9;
+            playerWon = false;
             SetRandomPlayer();
             ShowActivePlayer();
+            ClearBoardContent();
             SetBoardState(true);
         }
 
@@ -53,6 +56,7 @@ namespace ToeTactTics_V2
             Button target = (Button)sender;
             target.Content = (isPlayerXTurn) ? "X" : "O";
             target.IsEnabled = false;
+            buttonsRemaining--;
 
             EvaluateBoard();
 
@@ -73,6 +77,29 @@ namespace ToeTactTics_V2
             //Diagonal
             CheckLine(button1, button5, button9);
             CheckLine(button3, button5, button7);
+
+            if (playerWon)
+            {
+                string winnersName = "";
+                if (isPlayerXTurn) 
+                {
+                    winnersName = playerXName;
+                    playerXWins++; 
+                }
+                else 
+                {
+                    winnersName = playerOName;
+                    playerOWins++;
+                }
+                UpdateUserInfo();
+                MessageBox.Show(this, $"Congrats {winnersName}! You Win!");
+                StartGame();
+            }
+            else if(buttonsRemaining <= 0) 
+            {
+                MessageBox.Show(this, "Neither Player Wins. Draw Game!");
+                StartGame();
+            }
         }
 
         public bool CheckLine(Button first, Button second, Button third)
@@ -92,6 +119,11 @@ namespace ToeTactTics_V2
         public void SetBoardState(bool isActive)
         {
             foreach (Button button in buttons) { button.IsEnabled = isActive; }
+        }
+
+        public void ClearBoardContent()
+        {
+            foreach (Button button in buttons) { button.Content = ""; button.Foreground = Brushes.Black; }
         }
 
         public void ShowUsernameDialog()

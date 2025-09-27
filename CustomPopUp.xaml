@@ -9,9 +9,9 @@
     <Grid>
 
         <Label Content="Please Enter Names For Both Players Below" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontFamily="Rockwell" FontSize="14"/>
-        <Label x:Name="labelPlayerX" Content="Player (X)" HorizontalAlignment="Left" Margin="55,39,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Rockwell"/>
+        <Label x:Name="labelPlayerX" Content="Player One" HorizontalAlignment="Left" Margin="50,39,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Rockwell"/>
         <TextBox x:Name="textBoxPlayerX" HorizontalAlignment="Left" Margin="132,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="182" FontSize="14" MaxLength="14" TextChanged="OnTextChanged" ToolTip="Player Ones Name: Must Be Between 4-16 Characters"/>
-        <Label x:Name="labelPlayerO" Content="Player (O)" HorizontalAlignment="Left" Margin="55,72,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Rockwell"/>
+        <Label x:Name="labelPlayerO" Content="Player Two" HorizontalAlignment="Left" Margin="50,72,0,0" VerticalAlignment="Top" FontSize="14" FontFamily="Rockwell"/>
         <TextBox x:Name="textBoxPlayerO" HorizontalAlignment="Left" Margin="132,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="182" MaxLength="14" FontSize="14" TextChanged="OnTextChanged" ToolTip="Player Twos Name: Must Be Between 4-16 Characters"/>
         <Button x:Name="buttonSubmit" Content="Submit" HorizontalAlignment="Left" Margin="66,111,0,0" Padding="4,2" VerticalAlignment="Top" FontSize="14" Background="WhiteSmoke" Click="OnSubmit" FontFamily="Rockwell" IsEnabled="False"/>
         <Button x:Name="buttonCancel" Content="Cancel" HorizontalAlignment="Left" Margin="134,111,0,0" Padding="4,2" VerticalAlignment="Top" FontSize="14" Background="WhiteSmoke" Click="OnCancel" FontFamily="Rockwell"/>

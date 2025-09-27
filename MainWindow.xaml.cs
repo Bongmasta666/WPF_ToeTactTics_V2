@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Data.Common;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,11 +22,16 @@ namespace ToeTactTics_V2
 {
     public partial class MainWindow : Window
     {
-        string playerXName = "";
-        string playerOName = "";
-        int playerXWins = 0;
-        int playerOWins = 0;
-        bool isPlayerXTurn = true;
+        string playerOneName = "";
+        string playerTwoName = "";
+
+        int playerOneWins = 0;
+        int playerTwoWins = 0;
+
+        string playerOneSymbol = "X";
+        string playerTwoSymbol = "O";
+
+        bool isPlayerOneTurn = true;
         bool playerWon = false;
 
         Button[] buttons = [];
@@ -37,6 +43,14 @@ namespace ToeTactTics_V2
             InitializeComponent();
             buttons = [button1, button2, button3, button4, button5, 
                          button6, button7, button8, button9];
+
+            RoutedCommand newGameCommand = new();
+            CommandBindings.Add(new CommandBinding(newGameCommand, OnNewGame));
+            InputBindings.Add(new KeyBinding(newGameCommand, Key.N, ModifierKeys.Control));
+
+            RoutedCommand quitGameCommand = new();
+            CommandBindings.Add(new CommandBinding(quitGameCommand, OnQuitGame));
+            InputBindings.Add(new KeyBinding(quitGameCommand, Key.Q, ModifierKeys.Control));
         }
 
         public void OnNewGame(Object sender , RoutedEventArgs e) => ShowUsernameDialog();
@@ -47,20 +61,19 @@ namespace ToeTactTics_V2
             playerWon = false;
             SetRandomPlayer();
             ShowActivePlayer();
-            ClearBoardContent();
-            SetBoardState(true);
+            ResetBoard();
         }
 
         public void OnSquareSelected(Object sender, RoutedEventArgs e)
         {
             Button target = (Button)sender;
-            target.Content = (isPlayerXTurn) ? "X" : "O";
+            target.Content = (isPlayerOneTurn) ? playerOneSymbol : playerTwoName;
             target.IsEnabled = false;
             buttonsRemaining--;
 
             EvaluateBoard();
 
-            isPlayerXTurn = !isPlayerXTurn;
+            isPlayerOneTurn = !isPlayerOneTurn;
             ShowActivePlayer();
         }
 
@@ -81,15 +94,15 @@ namespace ToeTactTics_V2
             if (playerWon)
             {
                 string winnersName = "";
-                if (isPlayerXTurn) 
+                if (isPlayerOneTurn) 
                 {
-                    winnersName = playerXName;
-                    playerXWins++; 
+                    winnersName = playerOneName;
+                    playerOneWins++; 
                 }
                 else 
                 {
-                    winnersName = playerOName;
-                    playerOWins++;
+                    winnersName = playerTwoName;
+                    playerTwoWins++;
                 }
                 UpdateUserInfo();
                 MessageBox.Show(this, $"Congrats {winnersName}! You Win!");
@@ -135,8 +148,8 @@ namespace ToeTactTics_V2
 
             if (usernamePop.DialogResult == true)
             {
-                playerXName = usernamePop.textBoxPlayerX.Text;
-                playerOName = usernamePop.textBoxPlayerO.Text;
+                playerOneName = usernamePop.textBoxPlayerX.Text;
+                playerTwoName = usernamePop.textBoxPlayerO.Text;
                 UpdateUserInfo();
                 StartGame();
             }
@@ -146,18 +159,24 @@ namespace ToeTactTics_V2
         {
             Random random = new Random();
             int number = random.Next(1, 101);
-            isPlayerXTurn = number % 2 == 0; 
+            isPlayerOneTurn = number % 2 == 0; 
         }
 
         public void ShowActivePlayer()
         {
-            labelPlayerTurn.Content = (isPlayerXTurn) ? $"{playerXName}'s Turn" : $"{playerOName}'s Turn";
+            labelPlayerTurn.Content = (isPlayerOneTurn) ? $"{playerOneName}'s Turn" : $"{playerTwoName}'s Turn";
         }
 
         public void UpdateUserInfo()
         {
-            labelPlayerXInfo.Content = $"Player (X)  {playerXName}  : Wins - {playerXWins}";
-            labelPlayerOInfo.Content = $"Player (O)  {playerOName}  : Wins - {playerOWins}";
+            labelPlayerXInfo.Content = $"Player ({playerOneSymbol})  {playerOneName}  : Wins - {playerOneWins}";
+            labelPlayerOInfo.Content = $"Player ({playerTwoSymbol})  {playerTwoName}  : Wins - {playerTwoWins}";
+        }
+
+        public void ResetBoard()
+        {
+            ClearBoardContent();
+            SetBoardState(true);
         }
 
         public void OnQuitGame(Object sender, RoutedEventArgs e)

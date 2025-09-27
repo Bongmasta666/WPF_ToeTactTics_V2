@@ -17,8 +17,8 @@
         <DockPanel Grid.Row="0">
             <Menu>
                 <MenuItem Header="Game">
-                    <MenuItem Header="New Game" Click="OnNewGame"></MenuItem>
-                    <MenuItem Header="Quit Game" Click="OnQuitGame"></MenuItem>
+                    <MenuItem Header="New Game" Click="OnNewGame" InputGestureText="Ctrl+N" ToolTip="Starts A New Game"></MenuItem>
+                    <MenuItem Header="Quit Game" Click="OnQuitGame" InputGestureText="Ctrl+Q" ToolTip="Quits Application"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="Options"></MenuItem>
             </Menu>

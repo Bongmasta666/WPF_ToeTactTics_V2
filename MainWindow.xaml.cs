@@ -53,21 +53,21 @@ namespace ToeTactTics_V2
             InputBindings.Add(new KeyBinding(quitGameCommand, Key.Q, ModifierKeys.Control));
         }
 
-        public void OnNewGame(Object sender , RoutedEventArgs e) => ShowUsernameDialog();
+        public void OnNewGame(Object sender, RoutedEventArgs e) => ShowUsernameDialog();
 
         public void StartGame()
         {
             buttonsRemaining = 9;
             playerWon = false;
+            ResetBoard();
             SetRandomPlayer();
             ShowActivePlayer();
-            ResetBoard();
         }
 
         public void OnSquareSelected(Object sender, RoutedEventArgs e)
         {
             Button target = (Button)sender;
-            target.Content = (isPlayerOneTurn) ? playerOneSymbol : playerTwoName;
+            target.Content = (isPlayerOneTurn) ? playerOneSymbol : playerTwoSymbol;
             target.IsEnabled = false;
             buttonsRemaining--;
 
@@ -129,6 +129,40 @@ namespace ToeTactTics_V2
             return isConnected;
         }
 
+        public void ShowUsernameDialog()
+        {
+            CustomPopUp usernamePop = new CustomPopUp();
+            usernamePop.Title = "Username Selection";
+            usernamePop.Owner = this;
+            usernamePop.ShowDialog();
+            if (usernamePop.DialogResult == true) { OnDialogSuccess(usernamePop); }
+        }
+
+        private void OnDialogSuccess(CustomPopUp dialog)
+        {
+            playerOneName = dialog.textBoxPlayerX.Text;
+            playerTwoName = dialog.textBoxPlayerO.Text;
+            if (dialog.checkboxIntials.IsChecked == true)
+            {
+                playerOneSymbol = playerOneName[0].ToString();
+                playerTwoSymbol = playerTwoName[0].ToString();
+            }
+            else
+            {
+                playerOneSymbol = "X";
+                playerTwoSymbol = "O";
+            }
+            UpdateUserInfo();
+            StartGame();
+        }
+
+        public void SetRandomPlayer()
+        {
+            Random random = new Random();
+            int number = random.Next(1, 101);
+            isPlayerOneTurn = number % 2 == 0; 
+        }
+
         public void SetBoardState(bool isActive)
         {
             foreach (Button button in buttons) { button.IsEnabled = isActive; }
@@ -137,29 +171,6 @@ namespace ToeTactTics_V2
         public void ClearBoardContent()
         {
             foreach (Button button in buttons) { button.Content = ""; button.Foreground = Brushes.Black; }
-        }
-
-        public void ShowUsernameDialog()
-        {
-            CustomPopUp usernamePop = new CustomPopUp();
-            usernamePop.Title = "Username Selection";
-            usernamePop.Owner = this;
-            usernamePop.ShowDialog();
-
-            if (usernamePop.DialogResult == true)
-            {
-                playerOneName = usernamePop.textBoxPlayerX.Text;
-                playerTwoName = usernamePop.textBoxPlayerO.Text;
-                UpdateUserInfo();
-                StartGame();
-            }
-        }
-
-        public void SetRandomPlayer()
-        {
-            Random random = new Random();
-            int number = random.Next(1, 101);
-            isPlayerOneTurn = number % 2 == 0; 
         }
 
         public void ShowActivePlayer()

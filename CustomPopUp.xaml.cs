@@ -22,15 +22,26 @@ namespace ToeTactTics_V2
             textBoxPlayerX.Focus();
         }
 
+        public void OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            string nameOne = textBoxPlayerX.Text.Trim();
+            string nameTwo = textBoxPlayerO.Text.Trim();
+            if (nameOne.Length > 3 && nameTwo.Length > 3)
+            {
+                buttonSubmit.IsEnabled = true;
+                checkboxIntials.IsEnabled = (nameOne[0] != nameTwo[0]);
+            }
+            else
+            {
+                buttonSubmit.IsEnabled = false;
+                checkboxIntials.IsEnabled = false;
+            }
+        }
+
         public void OnSubmit(Object sender, RoutedEventArgs e)
         {
-            textBoxPlayerX.Text.Trim();
-            textBoxPlayerO.Text.Trim();
-            if (textBoxPlayerO.Text.Length > 3 && textBoxPlayerO.Text.Length > 3)
-            {
-                DialogResult = true;
-                Close();
-            }
+            DialogResult = true;
+            Close();
         }
 
         public void OnCancel(Object sender, RoutedEventArgs e) 

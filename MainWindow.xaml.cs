@@ -91,28 +91,8 @@ namespace ToeTactTics_V2
             CheckLine(button1, button5, button9);
             CheckLine(button3, button5, button7);
 
-            if (playerWon)
-            {
-                string winnersName = "";
-                if (isPlayerOneTurn) 
-                {
-                    winnersName = playerOneName;
-                    playerOneWins++; 
-                }
-                else 
-                {
-                    winnersName = playerTwoName;
-                    playerTwoWins++;
-                }
-                UpdateUserInfo();
-                MessageBox.Show(this, $"Congrats {winnersName}! You Win!");
-                StartGame();
-            }
-            else if(buttonsRemaining <= 0) 
-            {
-                MessageBox.Show(this, "Neither Player Wins. Draw Game!");
-                StartGame();
-            }
+            if (playerWon) { OnPlayerWon(); }
+            else if (buttonsRemaining <= 0) { OnDrawGame(); }
         }
 
         public bool CheckLine(Button first, Button second, Button third)
@@ -153,6 +133,30 @@ namespace ToeTactTics_V2
                 playerTwoSymbol = "O";
             }
             UpdateUserInfo();
+            StartGame();
+        }
+
+        public void OnPlayerWon()
+        {
+            string winnersName = "";
+            if (isPlayerOneTurn)
+            {
+                winnersName = playerOneName;
+                playerOneWins++;
+            }
+            else
+            {
+                winnersName = playerTwoName;
+                playerTwoWins++;
+            }
+            UpdateUserInfo();
+            MessageBox.Show(this, $"Congrats {winnersName}! You Win!");
+            StartGame();
+        }
+
+        public void OnDrawGame()
+        {
+            MessageBox.Show(this, "Neither Player Wins. Draw Game!");
             StartGame();
         }
 

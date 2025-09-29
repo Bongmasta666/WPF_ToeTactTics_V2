@@ -12,10 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+/*
+  Author: Michael Millar
+  Date: 09-25-2025
+  Description:
+    A Custom PopUp Window designed for this project. The window has 2 textboxes to allow for username input
+    and only allows submission if both users names are > 3. If both users have differnt first intials
+    allows for an additional option for game to be played with first intials.
+*/
 namespace ToeTactTics_V2
 {
     public partial class CustomPopUp : Window
     {
+        int minChars = 3;
         public CustomPopUp()
         {
             InitializeComponent();
@@ -26,7 +35,7 @@ namespace ToeTactTics_V2
         {
             string nameOne = textBoxPlayerX.Text.Trim();
             string nameTwo = textBoxPlayerO.Text.Trim();
-            if (nameOne.Length > 3 && nameTwo.Length > 3)
+            if (nameOne.Length > minChars && nameTwo.Length > minChars)
             {
                 buttonSubmit.IsEnabled = true;
                 checkboxIntials.IsEnabled = (nameOne[0] != nameTwo[0]);

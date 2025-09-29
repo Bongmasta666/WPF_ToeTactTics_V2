@@ -150,14 +150,21 @@ namespace ToeTactTics_V2
                 playerTwoWins++;
             }
             UpdateUserInfo();
-            MessageBox.Show(this, $"Congrats {winnersName}! You Win!");
-            StartGame();
+            ShowEndgameDialog($"Congrats {winnersName}! You Win!");
         }
 
         public void OnDrawGame()
         {
-            MessageBox.Show(this, "Neither Player Wins. Draw Game!");
-            StartGame();
+            ShowEndgameDialog("Neither Player Wins. Draw Game!");
+        }
+
+        public void ShowEndgameDialog(string message)
+        {
+            WinDrawPopUp pop = new WinDrawPopUp(this);
+            pop.Owner = this;
+            pop.ShowText(message);
+            pop.ShowDialog();
+            if (pop.DialogResult == false) { StartGame(); }
         }
 
         public void SetRandomPlayer()

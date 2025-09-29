@@ -1,0 +1,14 @@
+﻿<Window x:Class="ToeTactTics_V2.WinDrawPopUp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToeTactTics_V2"
+        mc:Ignorable="d"
+        Title="Results Dialog" Height="140" Width="320" Background="#FFCFA66D" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Canvas>
+        <TextBlock x:Name="textbox" Text="Test Text" Grid.Row="0" Width="280" TextAlignment="Center" FontFamily="Rockwell" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="20" Canvas.Top="30"/>
+        <Button Content="Continue" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="20" FontFamily="Rockwell" FontSize="13" Click="OnContinue" Canvas.Left="64" Canvas.Top="68"/>
+        <Button Content="Quit Game" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="20" FontFamily="Rockwell" FontSize="13" Click="OnQuitGame" Canvas.Left="168" Canvas.Top="68"/>
+    </Canvas>
+</Window>

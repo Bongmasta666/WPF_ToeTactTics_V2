@@ -15,9 +15,7 @@ namespace ToeTactTics_V2
 {
     public partial class MainWindow : Window
     {
-        Player playerOne;
-        Player playerTwo;
-
+        Player playerOne, playerTwo;
 
         bool isPlayerOneTurn = true;
         bool playerWon = false;

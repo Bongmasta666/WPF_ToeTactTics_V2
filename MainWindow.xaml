@@ -9,27 +9,26 @@
     <Grid>
         
         <Grid.RowDefinitions>
-            <RowDefinition Height="18"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="16"></RowDefinition>
+            <RowDefinition Height="18"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Row="0">
-            <Menu>
-                <MenuItem Header="Game">
-                    <MenuItem Header="New Game" Click="OnNewGame" InputGestureText="Ctrl+N" ToolTip="Starts A New Game"></MenuItem>
-                    <MenuItem Header="Quit Game" Click="OnQuitGame" InputGestureText="Ctrl+Q" ToolTip="Quits Application"></MenuItem>
-                </MenuItem>
-                <MenuItem Header="Options"></MenuItem>
-            </Menu>
-        </DockPanel>
+        <Menu Grid.Row="0">
+            <MenuItem Header="Game">
+                <MenuItem Header="New Game" Click="OnNewGame" InputGestureText="Ctrl+N" ToolTip="Starts A New Game"></MenuItem>
+                <MenuItem Header="Quit Game" Click="OnQuitGame" InputGestureText="Ctrl+Q" ToolTip="Quits Application"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Options"></MenuItem>
+        </Menu>
 
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Margin="0,-20,0,0">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Margin="0,-8,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            
+
             <Label x:Name="labelPlayerTurn" Content="Unknown User's Turn" HorizontalAlignment="Center" Grid.Row="0" VerticalAlignment="Top" FontSize="16" FontFamily="Rockwell" FontWeight="Bold" Foreground="LightGoldenrodYellow"/>
             <Label x:Name="labelPlayerXInfo" Content="Player (X) Unknown User : Wins - 0" HorizontalAlignment="Center" Margin="0,24,0,0" Grid.Row="0" VerticalAlignment="Top" FontSize="14" FontFamily="Rockwell" FontWeight="Bold" Foreground="LightGoldenrodYellow"/>
             <Label x:Name="labelPlayerOInfo" Content="Player (O) Unknown User : Wins - 0" HorizontalAlignment="Center" Margin="0,46,0,0" Grid.Row="0" VerticalAlignment="Top" FontSize="14" FontFamily="Rockwell" FontWeight="Bold" Foreground="LightGoldenrodYellow"/>
@@ -55,10 +54,11 @@
                 <Button x:Name="button8" Width="90" Height="90" Grid.Row="2" Grid.Column="1" IsEnabled="False" FontSize="40" ToolTip="Bottom Middle" Click="OnSquareSelected" Content=""/>
                 <Button x:Name="button9" Width="90" Height="90" Grid.Row="2" Grid.Column="2" IsEnabled="False" FontSize="40" ToolTip="Bottom Right" Click="OnSquareSelected" Content=""/>
             </Grid>
+
+            <Label x:Name="labelDrawGames" HorizontalContentAlignment="Center" Content="Draw Games: 0" FontFamily="Rockwell" FontSize="14" Grid.Row="2" HorizontalAlignment="Center" Foreground="LightGoldenrodYellow"></Label>
         </Grid>
-       
         
         <Rectangle Grid.Row="2" Fill="WhiteSmoke"></Rectangle>
-     
+       
     </Grid>
 </Window>

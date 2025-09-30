@@ -27,6 +27,7 @@ namespace ToeTactTics_V2
 
         int playerOneWins = 0;
         int playerTwoWins = 0;
+        int drawGames = 0;
 
         string playerOneSymbol = "X";
         string playerTwoSymbol = "O";
@@ -132,6 +133,10 @@ namespace ToeTactTics_V2
                 playerOneSymbol = "X";
                 playerTwoSymbol = "O";
             }
+            playerOneWins = 0;
+            playerTwoWins = 0;
+            drawGames = 0;
+            labelDrawGames.Content = $"Draw Games: {drawGames}";
             UpdateUserInfo();
             StartGame();
         }
@@ -155,6 +160,8 @@ namespace ToeTactTics_V2
 
         public void OnDrawGame()
         {
+            drawGames++;
+            labelDrawGames.Content = $"Draw Games: {drawGames}";
             ShowEndgameDialog("Neither Player Wins. Draw Game!");
         }
 

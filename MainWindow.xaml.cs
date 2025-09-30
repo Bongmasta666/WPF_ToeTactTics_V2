@@ -1,15 +1,8 @@
-﻿using System.Data.Common;
-using System.Diagnostics;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ToeTactTics_V2.classes;
 
 /*
   Author: Michael Millar
@@ -22,18 +15,13 @@ namespace ToeTactTics_V2
 {
     public partial class MainWindow : Window
     {
-        string playerOneName = "";
-        string playerTwoName = "";
+        Player playerOne;
+        Player playerTwo;
 
-        int playerOneWins = 0;
-        int playerTwoWins = 0;
-        int drawGames = 0;
-
-        string playerOneSymbol = "X";
-        string playerTwoSymbol = "O";
 
         bool isPlayerOneTurn = true;
         bool playerWon = false;
+        int drawGames = 0;
 
         Button[] buttons = [];
         int buttonsRemaining = 9;
@@ -68,7 +56,7 @@ namespace ToeTactTics_V2
         public void OnSquareSelected(Object sender, RoutedEventArgs e)
         {
             Button target = (Button)sender;
-            target.Content = (isPlayerOneTurn) ? playerOneSymbol : playerTwoSymbol;
+            target.Content = (isPlayerOneTurn) ? playerOne.symbol : playerTwo.symbol;
             target.IsEnabled = false;
             buttonsRemaining--;
 
@@ -121,20 +109,20 @@ namespace ToeTactTics_V2
 
         private void OnDialogSuccess(CustomPopUp dialog)
         {
-            playerOneName = dialog.textBoxPlayerX.Text;
-            playerTwoName = dialog.textBoxPlayerO.Text;
+            playerOne.username = dialog.textBoxPlayerX.Text;
+            playerTwo.username = dialog.textBoxPlayerO.Text;
             if (dialog.checkboxIntials.IsChecked == true)
             {
-                playerOneSymbol = playerOneName[0].ToString();
-                playerTwoSymbol = playerTwoName[0].ToString();
+                playerOne.symbol = playerOne.username[0].ToString();
+                playerTwo.symbol = playerTwo.username[0].ToString();
             }
             else
             {
-                playerOneSymbol = "X";
-                playerTwoSymbol = "O";
+                playerOne.symbol = "X";
+                playerTwo.symbol = "O";
             }
-            playerOneWins = 0;
-            playerTwoWins = 0;
+            playerOne.wins = 0;
+            playerTwo.wins = 0;
             drawGames = 0;
             labelDrawGames.Content = $"Draw Games: {drawGames}";
             UpdateUserInfo();
@@ -146,13 +134,13 @@ namespace ToeTactTics_V2
             string winnersName = "";
             if (isPlayerOneTurn)
             {
-                winnersName = playerOneName;
-                playerOneWins++;
+                winnersName = playerOne.username;
+                playerOne.wins++;
             }
             else
             {
-                winnersName = playerTwoName;
-                playerTwoWins++;
+                winnersName = playerTwo.username;
+                playerTwo.wins++;
             }
             UpdateUserInfo();
             ShowEndgameDialog($"Congrats {winnersName}! You Win!");
@@ -193,13 +181,13 @@ namespace ToeTactTics_V2
 
         public void ShowActivePlayer()
         {
-            labelPlayerTurn.Content = (isPlayerOneTurn) ? $"{playerOneName}'s Turn" : $"{playerTwoName}'s Turn";
+            labelPlayerTurn.Content = (isPlayerOneTurn) ? $"{playerOne.username}'s Turn" : $"{playerTwo.username}'s Turn";
         }
 
         public void UpdateUserInfo()
         {
-            labelPlayerXInfo.Content = $"Player ({playerOneSymbol})  {playerOneName}  : Wins - {playerOneWins}";
-            labelPlayerOInfo.Content = $"Player ({playerTwoSymbol})  {playerTwoName}  : Wins - {playerTwoWins}";
+            labelPlayerXInfo.Content = $"Player ({playerOne.symbol})  {playerOne.username}  : Wins - {playerOne.wins}";
+            labelPlayerOInfo.Content = $"Player ({playerTwo.symbol})  {playerTwo.username}  : Wins - {playerTwo.wins}";
         }
 
         public void ResetBoard()

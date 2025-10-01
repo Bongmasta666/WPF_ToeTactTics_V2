@@ -1,13 +1,11 @@
-﻿using System.Runtime.CompilerServices;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using ToeTactTics_V2.classes;
 
 /*
   Author: Michael Millar
-  Date: 09-25-2025
+  Date: 10-01-2025
   Description:
     A quick WPF Tic Tac Toe type game. 
     Keeps track of 2 users and their score, evaultes board state on each play, and alternates between players.
@@ -41,38 +39,6 @@ namespace ToeTactTics_V2
 
         public void OnNewGame(Object sender, RoutedEventArgs e) => ShowUsernameDialog();
 
-        public void OnStartGame(Object sender, RoutedEventArgs e) => StartGame();
-
-        public void StartGame()
-        {     
-            ResetBoard();
-            SetRandomPlayer();
-            ShowActivePlayer();
-            ToggleStart();
-            btnOptions.IsEnabled = false;
-        }
-
-        public void OnChangeSize(object sender, RoutedEventArgs e)
-        {
-            RadioButton obj = (RadioButton)sender;
-            char c = obj.Content.ToString()[0];
-            int gridSize = int.Parse(c.ToString());
-            gridManager.BuildGameGrid(gameGridCon, gridSize, 60, OnSquareSelected);
-        }
-
-        public void OnSquareSelected(Object sender, RoutedEventArgs e)
-        {
-            Button target = (Button)sender;
-            string stamp = (isPlayerOneTurn) ? playerOne.symbol : playerTwo.symbol;
-            target.Content = stamp;
-            target.IsEnabled = false;
-            buttonsRemaining--;
-
-            if (gridManager.CheckGrid(stamp)) { OnPlayerWon(); }
-            else if (buttonsRemaining <= 0) { OnDrawGame(); }
-            else { SwapPlayer(); }
-        }
-
         public void ShowUsernameDialog()
         {
             CustomPopUp usernamePop = new CustomPopUp();
@@ -102,13 +68,41 @@ namespace ToeTactTics_V2
             labelDrawGames.Content = $"Draw Games: {drawGames}";
             UpdateUserInfo();
             ToggleStart();
-            //StartGame();
         }
 
         public void ToggleStart()
         {   
             btnStart.IsEnabled = !btnStart.IsEnabled;
-            btnStart.Visibility = (btnStart.IsEnabled) ? Visibility.Visible : Visibility.Hidden;
+            if (btnStart.IsEnabled)
+            {
+                btnStart.Visibility = Visibility.Visible;
+                btnStart.Focus();
+            }
+            else { btnStart.Visibility = Visibility.Hidden;}
+        }
+
+        public void OnStartGame(Object sender, RoutedEventArgs e) => StartGame();
+
+        public void StartGame()
+        {
+            ResetBoard();
+            SetRandomPlayer();
+            ShowActivePlayer();
+            ToggleStart();
+            btnOptions.IsEnabled = false;
+        }
+
+        public void OnSquareSelected(Object sender, RoutedEventArgs e)
+        {
+            Button target = (Button)sender;
+            string stamp = (isPlayerOneTurn) ? playerOne.symbol : playerTwo.symbol;
+            target.Content = stamp;
+            target.IsEnabled = false;
+            buttonsRemaining--;
+
+            if (gridManager.CheckGrid(stamp)) { OnPlayerWon(); }
+            else if (buttonsRemaining <= 0) { OnDrawGame(); }
+            else { SwapPlayer(); }
         }
 
         public void OnPlayerWon()
@@ -139,6 +133,7 @@ namespace ToeTactTics_V2
         {
             btnOptions.IsEnabled = true;
             gridManager.SetGridState(false);
+            labelPlayerTurn.Content = "Game Over";
             WinDrawPopUp pop = new WinDrawPopUp(this);
             pop.Owner = this;
             pop.ShowText(message);
@@ -177,42 +172,17 @@ namespace ToeTactTics_V2
             labelPlayerOInfo.Content = $"Player ({playerTwo.symbol})  {playerTwo.username}  : Wins - {playerTwo.wins}";
         }
 
+        public void OnChangeSize(object sender, RoutedEventArgs e)
+        {
+            RadioButton obj = (RadioButton)sender;
+            char c = obj.Content.ToString()[0];
+            int gridSize = int.Parse(c.ToString());
+            gridManager.BuildGameGrid(gameGridCon, gridSize, 60, OnSquareSelected);
+        }
+
         public void OnQuitGame(Object sender, RoutedEventArgs e)
         {
             Close();
         }
     }
 }
-
-//public void EvaluateBoard()
-//{
-//    //Horizontal
-//    CheckLine(button1, button2, button3);
-//    CheckLine(button4, button5, button6);
-//    CheckLine(button7, button8, button9);
-//    //Vertical
-//    CheckLine(button1, button4, button7);
-//    CheckLine(button2, button5, button8);
-//    CheckLine(button3, button6, button9);
-//    //Diagonal
-//    CheckLine(button1, button5, button9);
-//    CheckLine(button3, button5, button7);
-
-//    if (playerWon) { OnPlayerWon(); }
-//    else if (buttonsRemaining <= 0) { OnDrawGame(); }
-//    else { SwapPlayer(); }
-//}
-
-//public bool CheckLine(Button first, Button second, Button third)
-//{
-//    bool isConnected = first.Content == second.Content &&
-//        second.Content == third.Content && first.Content.ToString() != "";
-//    if (isConnected)
-//    {
-//        playerWon = true;
-//        first.Foreground = buttonHighlight;
-//        second.Foreground = buttonHighlight;
-//        third.Foreground = buttonHighlight;
-//    }
-//    return isConnected;
-//}

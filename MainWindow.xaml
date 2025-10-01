@@ -46,6 +46,5 @@
         
         <Rectangle Grid.Row="2" Fill="WhiteSmoke"></Rectangle>
        
-
     </Grid>
 </Window>

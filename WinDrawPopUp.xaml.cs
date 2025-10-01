@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
+/*
+  Author: Michael Millar
+  Date: 10-01-2025
+  Description:
+    A Quick Rigid Window I Built in Order to Show The Endgame Results Rather Than Use
+    The Ugly Default MessageBox
+*/
 namespace ToeTactTics_V2
 {
-    /// <summary>
-    /// Interaction logic for WinDrawPopUp.xaml
-    /// </summary>
     public partial class WinDrawPopUp : Window
     {
         MainWindow main;
@@ -24,6 +16,7 @@ namespace ToeTactTics_V2
         {
             main = root;
             InitializeComponent();
+            btnContinue.Focus();
         }
 
         public void OnContinue(object sender, RoutedEventArgs e)

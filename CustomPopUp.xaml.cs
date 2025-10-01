@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 /*
   Author: Michael Millar
-  Date: 09-25-2025
+  Date: 10-01-2025
   Description:
     A Custom PopUp Window designed for this project. The window has 2 textboxes to allow for username input
     and only allows submission if both users names are > 3. If both users have differnt first intials

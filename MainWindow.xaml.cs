@@ -21,6 +21,7 @@ namespace ToeTactTics_V2
         int drawGames = 0;
 
         int buttonsRemaining = 9;
+        int buttonSize = 80;
 
         public MainWindow()
         {
@@ -34,7 +35,7 @@ namespace ToeTactTics_V2
             CommandBindings.Add(new CommandBinding(quitGameCommand, OnQuitGame));
             InputBindings.Add(new KeyBinding(quitGameCommand, Key.Q, ModifierKeys.Control));
 
-            gridManager.BuildGameGrid(gameGridCon, 3, 60, OnSquareSelected);
+            gridManager.BuildGameGrid(gameGridCon, 3, buttonSize, OnSquareSelected);
         }
 
         public void OnNewGame(Object sender, RoutedEventArgs e) => ShowUsernameDialog();
@@ -177,7 +178,13 @@ namespace ToeTactTics_V2
             RadioButton obj = (RadioButton)sender;
             char c = obj.Content.ToString()[0];
             int gridSize = int.Parse(c.ToString());
-            gridManager.BuildGameGrid(gameGridCon, gridSize, 60, OnSquareSelected);
+            switch (gridSize)
+            {
+                case 3: buttonSize = 90; break;
+                case 4: buttonSize = 70; break;
+                case 5: buttonSize = 58; break;
+            }
+            gridManager.BuildGameGrid(gameGridCon, gridSize, buttonSize, OnSquareSelected);
         }
 
         public void OnQuitGame(Object sender, RoutedEventArgs e)

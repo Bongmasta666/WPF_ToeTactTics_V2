@@ -15,15 +15,15 @@
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0">
-            <MenuItem Header="Game">
-                <MenuItem Header="New Game" Click="OnNewGame" InputGestureText="Ctrl+N" ToolTip="Starts A New Game"></MenuItem>
-                <MenuItem Header="Quit Game" Click="OnQuitGame" InputGestureText="Ctrl+Q" ToolTip="Quits Application"></MenuItem>
+            <MenuItem Header="Game" ToolTip="A game menu that includes functional for starting and quiting games.">
+                <MenuItem Header="New Game" Click="OnNewGame" InputGestureText="Ctrl+N" ToolTip="Starts a new game."/>
+                <MenuItem Header="Quit Game" Click="OnQuitGame" InputGestureText="Ctrl+Q" ToolTip="Quits the application."/>
             </MenuItem>
-            <MenuItem x:Name="btnOptions" Header="Options">
+            <MenuItem x:Name="btnOptions" Header="Options" ToolTip="An options menu that allows for different game settings to be adjusted. *Not available during game*"> 
                 <MenuItem Header="Grid Size">
-                    <RadioButton Content="3x3" Grid.Row="0" Click="OnChangeSize" IsChecked="True"></RadioButton>
-                    <RadioButton Content="4x4" Grid.Row="1" Click="OnChangeSize"></RadioButton>
-                    <RadioButton Content="5x5" Grid.Row="2" Click="OnChangeSize"></RadioButton>
+                    <RadioButton Content="3x3" Grid.Row="0" Click="OnChangeSize" IsChecked="True" ToolTip="Sets the grid to 3 by 3"/>
+                    <RadioButton Content="4x4" Grid.Row="1" Click="OnChangeSize" ToolTip="Sets the grid to 4 by 4"/>
+                    <RadioButton Content="5x5" Grid.Row="2" Click="OnChangeSize" ToolTip="Sets the grid to 5 by 5"/>
                 </MenuItem>
             </MenuItem>
         </Menu>
@@ -39,7 +39,8 @@
             <Label x:Name="labelPlayerXInfo" Content="Player (X) Unknown User : Wins - 0" HorizontalAlignment="Center" Margin="0,24,0,0" Grid.Row="0" VerticalAlignment="Top" FontSize="14" FontFamily="Rockwell" FontWeight="Bold" Foreground="LightGoldenrodYellow"/>
             <Label x:Name="labelPlayerOInfo" Content="Player (O) Unknown User : Wins - 0" HorizontalAlignment="Center" Margin="0,46,0,0" Grid.Row="0" VerticalAlignment="Top" FontSize="14" FontFamily="Rockwell" FontWeight="Bold" Foreground="LightGoldenrodYellow"/>
 
-            <Button x:Name="btnStart" Content="Start Game!" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold" FontFamily="Rockwell" FontSize="32" Panel.ZIndex="1" Visibility="Hidden" IsEnabled="False" Click="OnStartGame"/>
+            <Button x:Name="btnStart" Content="Start Game!" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold" FontFamily="Rockwell" FontSize="32" Panel.ZIndex="1" Visibility="Hidden" IsEnabled="False" Click="OnStartGame"
+                    ToolTip="Click this button to start match."/>
 
             <Label x:Name="labelDrawGames" HorizontalContentAlignment="Center" Content="Draw Games: 0" FontFamily="Rockwell" FontSize="14" Grid.Row="2" HorizontalAlignment="Center" Foreground="LightGoldenrodYellow"></Label>
         </Grid>

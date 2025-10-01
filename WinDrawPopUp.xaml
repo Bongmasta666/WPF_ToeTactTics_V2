@@ -8,7 +8,9 @@
         Title="Results Dialog" Height="140" Width="320" Background="#FFCFA66D" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Canvas>
         <TextBlock x:Name="textbox" Text="Test Text" Grid.Row="0" Width="280" TextAlignment="Center" FontFamily="Rockwell" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="20" Canvas.Top="30"/>
-        <Button x:Name="btnContinue" Content="Continue" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="20" FontFamily="Rockwell" FontSize="13" Click="OnContinue" Canvas.Left="64" Canvas.Top="68"/>
-        <Button Content="Quit Game" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="20" FontFamily="Rockwell" FontSize="13" Click="OnQuitGame" Canvas.Left="168" Canvas.Top="68"/>
+        <Button x:Name="btnContinue" Content="Continue" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="20" FontFamily="Rockwell" FontSize="13" Click="OnContinue" Canvas.Left="64" Canvas.Top="68"
+                ToolTip="Click to continue playing."/>
+        <Button Content="Quit Game" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Height="20" FontFamily="Rockwell" FontSize="13" Click="OnQuitGame" Canvas.Left="168" Canvas.Top="68"
+                ToolTip="Click to exit the application."/>
     </Canvas>
 </Window>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToeTactTics_V2"
         mc:Ignorable="d"
-        Title="Bong's ToeTactics" Height="460" Width="450" WindowStartupLocation="CenterScreen" Background="Green" ResizeMode="CanResize" MinWidth="300" MinHeight="460">
+        Title="Bong's ToeTactics" Height="480" Width="460" WindowStartupLocation="CenterScreen" Background="Green" ResizeMode="CanResize" MinWidth="380" MinHeight="480">
     <Grid>
         
         <Grid.RowDefinitions>
@@ -19,10 +19,16 @@
                 <MenuItem Header="New Game" Click="OnNewGame" InputGestureText="Ctrl+N" ToolTip="Starts A New Game"></MenuItem>
                 <MenuItem Header="Quit Game" Click="OnQuitGame" InputGestureText="Ctrl+Q" ToolTip="Quits Application"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Options"></MenuItem>
+            <MenuItem x:Name="btnOptions" Header="Options">
+                <MenuItem Header="Grid Size">
+                    <RadioButton Content="3x3" Grid.Row="0" Click="OnChangeSize" IsChecked="True"></RadioButton>
+                    <RadioButton Content="4x4" Grid.Row="1" Click="OnChangeSize"></RadioButton>
+                    <RadioButton Content="5x5" Grid.Row="2" Click="OnChangeSize"></RadioButton>
+                </MenuItem>
+            </MenuItem>
         </Menu>
 
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Margin="0,-8,0,0">
+        <Grid x:Name="gameGridCon" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Margin="0,-8,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -33,32 +39,13 @@
             <Label x:Name="labelPlayerXInfo" Content="Player (X) Unknown User : Wins - 0" HorizontalAlignment="Center" Margin="0,24,0,0" Grid.Row="0" VerticalAlignment="Top" FontSize="14" FontFamily="Rockwell" FontWeight="Bold" Foreground="LightGoldenrodYellow"/>
             <Label x:Name="labelPlayerOInfo" Content="Player (O) Unknown User : Wins - 0" HorizontalAlignment="Center" Margin="0,46,0,0" Grid.Row="0" VerticalAlignment="Top" FontSize="14" FontFamily="Rockwell" FontWeight="Bold" Foreground="LightGoldenrodYellow"/>
 
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Button x:Name="button1" Width="90" Height="90" Grid.Row="0" Grid.Column="0" IsEnabled="False" FontSize="40" ToolTip="Top Left" Click="OnSquareSelected" Content=""/>
-                <Button x:Name="button2" Width="90" Height="90" Grid.Row="0" Grid.Column="1" IsEnabled="False" FontSize="40" ToolTip="Top Middle" Click="OnSquareSelected" Content=""/>
-                <Button x:Name="button3" Width="90" Height="90" Grid.Row="0" Grid.Column="2" IsEnabled="False" FontSize="40" ToolTip="Top Right" Click="OnSquareSelected" Content=""/>
-                <Button x:Name="button4" Width="90" Height="90" Grid.Row="1" Grid.Column="0" IsEnabled="False" FontSize="40" ToolTip="Middle Left" Click="OnSquareSelected" Content=""/>
-                <Button x:Name="button5" Width="90" Height="90" Grid.Row="1" Grid.Column="1" IsEnabled="False" FontSize="40" ToolTip="Middle Middle" Click="OnSquareSelected" Content=""/>
-                <Button x:Name="button6" Width="90" Height="90" Grid.Row="1" Grid.Column="2" IsEnabled="False" FontSize="40" ToolTip="Middle Right" Click="OnSquareSelected" Content=""/>
-                <Button x:Name="button7" Width="90" Height="90" Grid.Row="2" Grid.Column="0" IsEnabled="False" FontSize="40" ToolTip="Bottom Left" Click="OnSquareSelected" Content=""/>
-                <Button x:Name="button8" Width="90" Height="90" Grid.Row="2" Grid.Column="1" IsEnabled="False" FontSize="40" ToolTip="Bottom Middle" Click="OnSquareSelected" Content=""/>
-                <Button x:Name="button9" Width="90" Height="90" Grid.Row="2" Grid.Column="2" IsEnabled="False" FontSize="40" ToolTip="Bottom Right" Click="OnSquareSelected" Content=""/>
-            </Grid>
+            <Button x:Name="btnStart" Content="Start Game!" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold" FontFamily="Rockwell" FontSize="32" Panel.ZIndex="1" Visibility="Hidden" IsEnabled="False" Click="OnStartGame"/>
 
             <Label x:Name="labelDrawGames" HorizontalContentAlignment="Center" Content="Draw Games: 0" FontFamily="Rockwell" FontSize="14" Grid.Row="2" HorizontalAlignment="Center" Foreground="LightGoldenrodYellow"></Label>
         </Grid>
         
         <Rectangle Grid.Row="2" Fill="WhiteSmoke"></Rectangle>
        
+
     </Grid>
 </Window>

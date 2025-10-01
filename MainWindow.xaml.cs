@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -15,21 +16,17 @@ namespace ToeTactTics_V2
 {
     public partial class MainWindow : Window
     {
+        GridManager gridManager = new();
         Player playerOne, playerTwo;
 
         bool isPlayerOneTurn = true;
-        bool playerWon = false;
         int drawGames = 0;
 
-        Button[] buttons = [];
         int buttonsRemaining = 9;
 
-        SolidColorBrush buttonHighlight = Brushes.LightSalmon; 
         public MainWindow()
         {
             InitializeComponent();
-            buttons = [button1, button2, button3, button4, button5, 
-                         button6, button7, button8, button9];
 
             RoutedCommand newGameCommand = new();
             CommandBindings.Add(new CommandBinding(newGameCommand, OnNewGame));
@@ -38,62 +35,42 @@ namespace ToeTactTics_V2
             RoutedCommand quitGameCommand = new();
             CommandBindings.Add(new CommandBinding(quitGameCommand, OnQuitGame));
             InputBindings.Add(new KeyBinding(quitGameCommand, Key.Q, ModifierKeys.Control));
+
+            gridManager.BuildGameGrid(gameGridCon, 3, 60, OnSquareSelected);
         }
 
         public void OnNewGame(Object sender, RoutedEventArgs e) => ShowUsernameDialog();
 
+        public void OnStartGame(Object sender, RoutedEventArgs e) => StartGame();
+
         public void StartGame()
-        {
-            buttonsRemaining = 9;
-            playerWon = false;
+        {     
             ResetBoard();
             SetRandomPlayer();
             ShowActivePlayer();
+            ToggleStart();
+            btnOptions.IsEnabled = false;
+        }
+
+        public void OnChangeSize(object sender, RoutedEventArgs e)
+        {
+            RadioButton obj = (RadioButton)sender;
+            char c = obj.Content.ToString()[0];
+            int gridSize = int.Parse(c.ToString());
+            gridManager.BuildGameGrid(gameGridCon, gridSize, 60, OnSquareSelected);
         }
 
         public void OnSquareSelected(Object sender, RoutedEventArgs e)
         {
             Button target = (Button)sender;
-            target.Content = (isPlayerOneTurn) ? playerOne.symbol : playerTwo.symbol;
+            string stamp = (isPlayerOneTurn) ? playerOne.symbol : playerTwo.symbol;
+            target.Content = stamp;
             target.IsEnabled = false;
             buttonsRemaining--;
 
-            EvaluateBoard();
-
-            isPlayerOneTurn = !isPlayerOneTurn;
-            ShowActivePlayer();
-        }
-
-        public void EvaluateBoard()
-        {
-            //Horizontal
-            CheckLine(button1, button2, button3);
-            CheckLine(button4, button5, button6);
-            CheckLine(button7, button8, button9);
-            //Vertical
-            CheckLine(button1, button4, button7);
-            CheckLine(button2, button5, button8);
-            CheckLine(button3, button6, button9);
-            //Diagonal
-            CheckLine(button1, button5, button9);
-            CheckLine(button3, button5, button7);
-
-            if (playerWon) { OnPlayerWon(); }
+            if (gridManager.CheckGrid(stamp)) { OnPlayerWon(); }
             else if (buttonsRemaining <= 0) { OnDrawGame(); }
-        }
-
-        public bool CheckLine(Button first, Button second, Button third)
-        {
-            bool isConnected = first.Content == second.Content &&
-                second.Content == third.Content && first.Content.ToString() != "";
-            if (isConnected)
-            {
-                playerWon = true;
-                first.Foreground = buttonHighlight;
-                second.Foreground = buttonHighlight;
-                third.Foreground = buttonHighlight;
-            }
-            return isConnected;
+            else { SwapPlayer(); }
         }
 
         public void ShowUsernameDialog()
@@ -124,7 +101,14 @@ namespace ToeTactTics_V2
             drawGames = 0;
             labelDrawGames.Content = $"Draw Games: {drawGames}";
             UpdateUserInfo();
-            StartGame();
+            ToggleStart();
+            //StartGame();
+        }
+
+        public void ToggleStart()
+        {   
+            btnStart.IsEnabled = !btnStart.IsEnabled;
+            btnStart.Visibility = (btnStart.IsEnabled) ? Visibility.Visible : Visibility.Hidden;
         }
 
         public void OnPlayerWon()
@@ -153,11 +137,13 @@ namespace ToeTactTics_V2
 
         public void ShowEndgameDialog(string message)
         {
+            btnOptions.IsEnabled = true;
+            gridManager.SetGridState(false);
             WinDrawPopUp pop = new WinDrawPopUp(this);
             pop.Owner = this;
             pop.ShowText(message);
             pop.ShowDialog();
-            if (pop.DialogResult == false) { StartGame(); }
+            ToggleStart();
         }
 
         public void SetRandomPlayer()
@@ -167,14 +153,17 @@ namespace ToeTactTics_V2
             isPlayerOneTurn = number % 2 == 0; 
         }
 
-        public void SetBoardState(bool isActive)
+        public void SwapPlayer()
         {
-            foreach (Button button in buttons) { button.IsEnabled = isActive; }
+            isPlayerOneTurn = !isPlayerOneTurn;
+            ShowActivePlayer();
         }
 
-        public void ClearBoardContent()
+        public void ResetBoard()
         {
-            foreach (Button button in buttons) { button.Content = ""; button.Foreground = Brushes.Black; }
+            gridManager.ResetButtons();
+            gridManager.SetGridState(true);
+            buttonsRemaining = gridManager.GetButtonCount();
         }
 
         public void ShowActivePlayer()
@@ -188,15 +177,42 @@ namespace ToeTactTics_V2
             labelPlayerOInfo.Content = $"Player ({playerTwo.symbol})  {playerTwo.username}  : Wins - {playerTwo.wins}";
         }
 
-        public void ResetBoard()
-        {
-            ClearBoardContent();
-            SetBoardState(true);
-        }
-
         public void OnQuitGame(Object sender, RoutedEventArgs e)
         {
             Close();
         }
     }
 }
+
+//public void EvaluateBoard()
+//{
+//    //Horizontal
+//    CheckLine(button1, button2, button3);
+//    CheckLine(button4, button5, button6);
+//    CheckLine(button7, button8, button9);
+//    //Vertical
+//    CheckLine(button1, button4, button7);
+//    CheckLine(button2, button5, button8);
+//    CheckLine(button3, button6, button9);
+//    //Diagonal
+//    CheckLine(button1, button5, button9);
+//    CheckLine(button3, button5, button7);
+
+//    if (playerWon) { OnPlayerWon(); }
+//    else if (buttonsRemaining <= 0) { OnDrawGame(); }
+//    else { SwapPlayer(); }
+//}
+
+//public bool CheckLine(Button first, Button second, Button third)
+//{
+//    bool isConnected = first.Content == second.Content &&
+//        second.Content == third.Content && first.Content.ToString() != "";
+//    if (isConnected)
+//    {
+//        playerWon = true;
+//        first.Foreground = buttonHighlight;
+//        second.Foreground = buttonHighlight;
+//        third.Foreground = buttonHighlight;
+//    }
+//    return isConnected;
+//}

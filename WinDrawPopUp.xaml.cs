@@ -28,7 +28,6 @@ namespace ToeTactTics_V2
 
         public void OnContinue(object sender, RoutedEventArgs e)
         {
-            main.StartGame();
             Close();
         }
 
